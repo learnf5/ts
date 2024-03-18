@@ -153,13 +153,13 @@ switch $::class__lab {
 
 "Capture and Analysis" {
    tmsh::create "/ltm pool /Common/MZ_pool monitor http members add {172.16.20.1:80}"
-   tmsh::create "/ltm pool /Common/IE_pool monitor http members add {172.16.20.2:80}"
+   tmsh::create "/ltm pool /Common/Edg_pool monitor http members add {172.16.20.2:80}"
    tmsh::create "/ltm pool /Common/TS_pool3 monitor http members add {172.16.20.3:80}"
    set irule_buffer [string trim "{ 
     when HTTP_REQUEST {
      if { \[HTTP::uri\] eq \"/\" } { HTTP::uri /browserspecific.html }
      if { \[HTTP::header user-agent\] contains \"Mozilla\" } { pool MZ_pool
-       } elseif { \[HTTP::header user-agent\] contains \"Trident\" } { pool IE_pool 
+       } elseif { \[HTTP::header user-agent\] contains \"Edg\" } { pool Edg_pool 
       }
      }
    }"]
@@ -201,12 +201,12 @@ switch $::class__lab {
    set script_data "tmsh create /auth partition WORKA\n"
    append script_data "tmsh create /auth partition WORKB\n"
    append script_data "tmsh cd /WORKA\n"
-   append script_data "tmsh create /auth user managera {partition-access add {WORKA {role manager}} shell tmsh password f5trnX}\n"
+   append script_data "tmsh create /auth user managera {partition-access add {WORKA {role manager}} shell tmsh password tempchangepass}\n"
    append script_data "tmsh create /ltm monitor http /WORKA/WORKA_HTTP_mon recv 'Server \[1-3\]' send 'GET /\\r\\n'\n"
    append script_data "tmsh create /ltm pool /WORKA/WORKA_HTTP_pool monitor /WORKA/WORKA_HTTP_mon members add {172.16.20.1:80 {ratio 1 priority-group 0} 172.16.20.2:80 {ratio 1 priority-group 0} 172.16.20.3:80 {ratio 1 priority-group 0}}\n"
    append script_data "tmsh create /ltm virtual /WORKA/WORKA_HTTP_vs destination 10.10.$student.105:80 pool /WORKA/WORKA_HTTP_pool profiles add { tcp http }\n"
    append script_data "tmsh cd /WORKB\n"
-   append script_data "tmsh create /auth user managerb {partition-access add {WORKB {role manager}} shell tmsh password f5trnX}\n"
+   append script_data "tmsh create /auth user managerb {partition-access add {WORKB {role manager}} shell tmsh password tempchangepass}\n"
    append script_data "tmsh create /ltm virtual /WORKB/WORKB_HTTP_vs destination 10.10.$student.110:80 pool HTTP_pool profiles add { tcp http }\n"
 
    # Check to see if the file exists.
