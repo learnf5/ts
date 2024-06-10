@@ -159,7 +159,7 @@ switch $::class__lab {
     when HTTP_REQUEST {
      if { \[HTTP::uri\] eq \"/\" } { HTTP::uri /browserspecific.html }
      if { \[HTTP::header user-agent\] contains \"Mozilla\" } { pool MZ_pool
-       } elseif { \[HTTP::header user-agent\] contains \"Edge\" } { pool Edg_pool 
+       } elseif { \[HTTP::header user-agent\] contains \"Edg\" } { pool Edg_pool 
       }
      }
    }"]
