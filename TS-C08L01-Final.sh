@@ -3,8 +3,9 @@ set -x
 PS4='+$(date +"%T.%3N"): '
 
 #Download needed files
-curl --silent https://raw.githubusercontent.com/learnf5/ts/main/arp.sh --output /tmp/
-curl --silent https://raw.githubusercontent.com/learnf5/ts/main/fs.sh --output /tmp/
+#curl --silent https://raw.githubusercontent.com/learnf5/ts/main/arp.sh --output /tmp/
+curl --silent https://raw.githubusercontent.com/learnf5/ts/main/all.sh --output /tmp/
+chmod 777 /tmp/all.sh
 
 # update Student Workstation
 
