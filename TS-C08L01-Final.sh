@@ -4,8 +4,8 @@ PS4='+$(date +"%T.%3N"): '
 
 #Download needed files
 #curl --silent https://raw.githubusercontent.com/learnf5/ts/main/arp.sh --output /tmp/arp.sh
-curl --silent https://raw.githubusercontent.com/learnf5/ts/main/all.sh --output /tmp/all.sh
-chmod 777 /tmp/all.sh
+#curl --silent https://raw.githubusercontent.com/learnf5/ts/main/all.sh --output /tmp/all.sh
+#chmod 777 /tmp/all.sh
 
 # update Student Workstation
 
